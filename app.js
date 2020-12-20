@@ -1,12 +1,29 @@
 // require packages used in the project
 const express = require('express')
-const app = express()
-const port = 3000
-
-// require express-handlebars 
+// 載入 mongoose
+const mongoose = require('mongoose')
+// 載入 express-handlebars 
 const exphbs = require('express-handlebars')
 // 將 json 載入 Express 
 const restaurantList = require('./restaurant.json')
+
+const app = express()
+
+const port = 3000
+
+// 設定連線到 mongoDB
+mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
+
+// 取得資料庫連線狀態
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
 
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
