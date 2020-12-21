@@ -12,7 +12,7 @@ const app = express()
 const port = 3000
 
 // 設定連線到 mongoDB
-mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
