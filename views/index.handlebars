@@ -19,32 +19,36 @@
 
 <!-- restaurant list -->
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-md-10 col-12 mx-auto">
-      <div class="card-columns">
+  <div class="row justify-content-center">
 
-        {{#each restaurants}}
-        <a href="/restaurants/{{this.id}}" class="text-secondary">
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
-            <div class="card-body p-3">
-              <h6 class="card-title mb-1">{{this.name}}</h6>
+    {{#each restaurants}}
+    <div class="card col-12 col-sm-4 col-md-3 mb-5 mx-4 p-0">
+      <a href="/restaurants/{{this._id}}" class="text-secondary">
+        <div class="card mb-3">
+          <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+          <div class="card-body p-3">
+            <h6 class="card-title mb-1">{{this.name}}</h6>
 
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i> {{this.category}}
-              </div>
-
-              <span class="badge badge-pill badge-danger font-weight-normal">
-                {{this.rating}}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
-
+            <div class="restaurant-category mb-1">
+              <i class="fas fa-utensils pr-2"></i> {{this.category}}
             </div>
-          </div>
-        </a>
-        {{/each}}
 
+            <span class="badge badge-pill badge-danger font-weight-normal">
+              {{this.rating}}
+              <i class="fas fa-star fa-xs"></i>
+            </span>
+
+          </div>
+        </div>
+      </a>
+      <div class="card-footer px-3 d-flex justify-content-between">
+        <div>
+          <a class="btn btn-outline-secondary btn-sm mr-2" href="/restaurants/{{this._id}}" role="button"><i
+              class="fas fa-info-circle"></i></a>
+        </div>
       </div>
     </div>
+    {{/each}}
+
   </div>
 </div>
