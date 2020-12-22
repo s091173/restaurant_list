@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 // 將 json 載入 Express 
 const restaurantList = require('./restaurant.json')
+// 載入 restaurant model
+const Restaurant = require('./models/restaurant')
 
 const app = express()
 
@@ -32,9 +34,12 @@ app.set('view engine', 'handlebars')
 // setting static files
 app.use(express.static('public'))
 
-// route setting
+// 設定首頁路由
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
 })
 
 app.get('/search', (req, res) => {
