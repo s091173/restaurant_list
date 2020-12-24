@@ -48,6 +48,9 @@
           <a class="btn btn-outline-secondary btn-sm" href="/restaurants/{{this._id}}/edit" role="button"><i
               class="fas fa-edit"></i></a>
         </div>
+        <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+          <button class="btn btn-outline-danger btn-sm" type="submit">X</button>
+        </form>
       </div>
     </div>
     {{/each}}
