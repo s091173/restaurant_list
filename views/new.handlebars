@@ -1,0 +1,89 @@
+<form action="/restaurants" method="POST">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-12 col-md-10 mx-auto">
+
+        {{!-- name --}}
+        <div class="form-group row justify-content-center">
+          <label for="name" class="text-secondary col-form-label">
+            <i class="fas fa-utensils"></i>
+            名稱：
+          </label>
+          <input type="text" class="form-control col-sm-9" id="name" placeholder="餐廳名稱" name="name" required>
+        </div>
+
+        {{!-- category --}}
+        <div class="form-group row justify-content-center">
+          <label for="category" class="text-secondary col-form-label">
+            <i class="fas fa-align-left"></i>
+            類別：
+          </label>
+          <input type="text" class="form-control col-sm-9" id="category" placeholder="餐廳類別" name="category" required>
+        </div>
+
+        {{!-- image --}}
+        <div class="form-group row justify-content-center">
+          <label for="image" class="text-secondary col-form-label">
+            <i class="far fa-image"></i>
+            照片：
+          </label>
+          <input type="text" class="form-control col-sm-9" id="image" placeholder="餐廳照片" name="image" required>
+        </div>
+
+        {{!-- location --}}
+        <div class="form-group row justify-content-center">
+          <label for="location" class="text-secondary col-form-label">
+            <i class="fas fa-map-marker-alt"></i>
+            地點：
+          </label>
+          <input type="text" class="form-control col-sm-9" id="location" placeholder="餐廳地點" name="location" required>
+        </div>
+
+        {{!-- phone --}}
+        <div class="form-group row justify-content-center">
+          <label for="phone" class="text-secondary col-form-label">
+            <i class="fas fa-phone"></i>
+            電話：
+          </label>
+          <input type="text" class="form-control col-sm-9" id="phone" placeholder="餐廳電話" name="phone" required>
+        </div>
+
+        {{!-- googlo_map --}}
+        <div class="form-group row justify-content-center">
+          <label for="google_map" class="text-secondary col-form-label">
+            <i class="fas fa-location-arrow"></i>
+            地圖：
+          </label>
+          <input type="text" class="form-control col-sm-9" id="google_map" placeholder="餐廳地圖" name="google_map"
+            required>
+        </div>
+
+        {{!-- rating --}}
+        <div class="form-group row justify-content-center">
+          <label for="rating" class="text-secondary col-form-label">
+            <i class="fas fa-star-half-alt"></i>
+            評價：
+          </label>
+          <input type="text" class="form-control col-sm-9" id="rating" placeholder="餐廳評價" name="rating" required>
+        </div>
+
+        {{!-- description --}}
+        <div class="form-group row justify-content-center">
+          <label for="description" class=" text-secondary col-form-label">
+            <i class="fas fa-file-alt"></i>
+            簡介：
+          </label>
+          <textarea class="form-control col-sm-9" rows="8" placeholder="餐廳簡介" id="description" name="description"
+            required></textarea>
+        </div>
+
+        <div class="row col-12 justify-content-end">
+          <button type="submit" class="btn btn-outline-primary">新增</button>
+          <a class="btn btn-secondary ml-3" href="/" role="button">回到主頁</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+</form>
