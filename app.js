@@ -4,6 +4,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 // 載入 express-handlebars 
 const exphbs = require('express-handlebars')
+// 載入 bodyParser
+const bodyParser = require('body-parser')
 // 將 json 載入 Express 
 const restaurantList = require('./restaurant.json')
 // 載入 restaurant model
@@ -32,7 +34,9 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 // setting static files
-app.use(express.static('public'))
+app.use(
+  express.static('public'),
+  bodyParser.urlencoded({ extended: true }))
 
 // 設定首頁路由
 app.get('/', (req, res) => {
@@ -54,6 +58,43 @@ app.get('/restaurants/:id', (req, res) => {
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// Edit 頁面路由
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// Update 路由
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  const name = req.body.name
+  const category = req.body.category
+  const image = req.body.image
+  const location = req.body.location
+  const phone = req.body.phone
+  const google_map = req.body.google_map
+  const rating = req.body.rating
+  const description = req.body.description
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = name
+      restaurant.category = category
+      restaurant.image = image
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = google_map
+      restaurant.rating = rating
+      restaurant.description = description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
 
