@@ -128,7 +128,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // Delete 路由
-app.get('/restaurants/:id/delete', (req, res) => {
+app.post('/restaurants/:id/delete', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
