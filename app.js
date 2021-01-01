@@ -70,8 +70,11 @@ app.post('/restaurants', (req, res) => {
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter((restaurant) => restaurant.name.toLowerCase().includes(keyword.toLowerCase()))
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+  return Restaurant.find()
+    .lean()
+    .then(restaurants => restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase())))
+    .then(restaurants => res.render('index', { restaurants: restaurants, keyword: keyword }))
+    .catch(error => console.log(error))
 })
 
 // Read 路由
