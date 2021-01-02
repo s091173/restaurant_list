@@ -6,6 +6,9 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 // 載入 bodyParser
 const bodyParser = require('body-parser')
+// 載入 method-override
+const methodOverride = require('method-override')
+
 // 將 json 載入 Express 
 const restaurantList = require('./restaurant.json')
 // 載入 restaurant model
@@ -36,7 +39,8 @@ app.set('view engine', 'handlebars')
 // setting static files
 app.use(
   express.static('public'),
-  bodyParser.urlencoded({ extended: true }))
+  bodyParser.urlencoded({ extended: true }),
+  methodOverride('_method'))
 
 // 設定首頁路由
 app.get('/', (req, res) => {
@@ -96,7 +100,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // Update 路由
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
 
   const { name, category, image, location, phone, google_map, rating, description } = req.body
@@ -118,7 +122,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // Delete 路由
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
