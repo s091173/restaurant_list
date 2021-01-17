@@ -1,6 +1,6 @@
 <!-- ./views/index.handlebars -->
 <!-- search bar -->
-<div class="container search-bar">
+<div class="container search-bar mb-5">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
       <form action="/search">
@@ -16,6 +16,22 @@
     </div>
   </div>
 </div>
+
+{{!-- drop button --}}
+<div class="container">
+  <div class="row justify-content-end">
+    <form action="/sort" method="GET">
+      <select class="col-12" name="sort" id="sort" onchange="submit()">
+        <option value="name" disabled selected>Sort</option>
+        <option value="name">A -> Z</option>
+        <option value="-name">Z -> A</option>
+        <option value="category">類別</option>
+        <option value="location">地區</option>
+      </select>
+    </form>
+  </div>
+</div>
+
 
 <!-- restaurant list -->
 <div class="container mt-5">

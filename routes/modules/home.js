@@ -25,5 +25,15 @@ router.get('/search', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// filter route
+router.get('/sort', (req, res) => {
+  const sort = req.query.sort
+  return Restaurant.find()
+    .lean()
+    .sort(sort)
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
+})
+
 // 匯出路由模組
 module.exports = router
