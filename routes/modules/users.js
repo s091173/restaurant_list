@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router()
 // 引用 passport
 const passport = require('passport')
+// 載入 bcrypt
+const bcrypt = require('bcryptjs')
 
 // 引用 User Model
 const User = require('../../models/user')
@@ -28,6 +30,8 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   // 取得註冊表單參數
   const { name, email, password, confirmPassword } = req.body
+
+  // alert message
   const errors = []
 
   if (!name || !email || !password || !confirmPassword) {
@@ -61,11 +65,15 @@ router.post('/register', (req, res) => {
         })
       }
       // 如果還沒註冊：寫入資料庫
-      return User.create({
-        name,
-        email,
-        password
-      })
+      return bcrypt
+        .genSalt(10) // 產生「鹽」，並設定複雜度係數為 10
+        .then(salt => bcrypt.hash(password, salt)) // 為使用者密碼「加鹽」，產生雜湊值
+        .then(hash =>
+          User.create({
+            name,
+            email,
+            password: hash // 用雜湊值取代原本的使用者密碼 
+          }))
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
     })
