@@ -1,6 +1,8 @@
 // users 路由模組
 const express = require('express')
 const router = express.Router()
+// 引用 passport
+const passport = require('passport')
 
 // 引用 User Model
 const User = require('../../models/user')
@@ -11,9 +13,11 @@ router.get('/login', (req, res) => {
 })
 
 // login submit
-router.post('/login', (req, res) => {
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}))
 
-})
 
 // register page
 router.get('/register', (req, res) => {
